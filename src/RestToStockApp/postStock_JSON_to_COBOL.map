@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/JsonDomainMsg.xsd" var="var"/>
+    <input derivedFrom="MB:JSON_schema_in_swagger_document" path="/swagger.json" var="var1"/>
+    <output path="/newStock.xsd"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="in" uri="http://www.ibm.com/iib/msl/json"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="postStock_JSON_to_COBOL">
+        <input namespace="http://www.ibm.com/iib/msl/json" path="$var/mb:msg(JSON,assembly,JSON,Properties,HTTPInputHeader,HTTPReplyHeader,HTTPRequestHeader,HTTPResponseHeader)" var="ComIbmMessageAssembly_JSON">
+            <cast derivedFrom="MB:JSON_operation_request" path="$ComIbmMessageAssembly_JSON/JSON/Data/type('anyType')" qualifier="{http://www.ibm.com/iib/msl/json}Stock" ref="var1"/>
+        </input>
+        <output path="mb:msg(NewStock,assembly,DFDL,Properties,HTTPInputHeader,HTTPReplyHeader,HTTPRequestHeader,HTTPResponseHeader)" var="ComIbmMessageAssembly_NewStock"/>
+        <move>
+            <input path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/id"/>
+            <output path="$ComIbmMessageAssembly_NewStock/NewStock/STPRID"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/name"/>
+            <output path="$ComIbmMessageAssembly_NewStock/NewStock/STPRNM"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/description"/>
+            <output path="$ComIbmMessageAssembly_NewStock/NewStock/STPRDS"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/color"/>
+            <output path="$ComIbmMessageAssembly_NewStock/NewStock/STCOLR"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/size"/>
+            <output path="$ComIbmMessageAssembly_NewStock/NewStock/STSIZE"/>
+        </move>
+        <move>
+            <input path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/number"/>
+            <output path="$ComIbmMessageAssembly_NewStock/NewStock/STNUMR"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

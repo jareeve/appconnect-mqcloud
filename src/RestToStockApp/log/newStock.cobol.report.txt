@@ -1,0 +1,4 @@
+
+
+Importing file: /home/jreeve/a/e/firefly/itf3/iib-app-connect-trigger-pattern/WarehouseNewStockEventToAppConnect/newStock.cpy
+

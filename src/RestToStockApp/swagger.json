@@ -1,0 +1,61 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "RestToStockApp",
+    "version" : "1.0.0",
+    "description" : "RestToStockApp"
+  },
+  "paths" : {
+    "/Stock" : {
+      "post" : {
+        "operationId" : "postStock",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Insert a Stock",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "schema" : {
+            "$ref" : "#/definitions/Stock"
+          },
+          "description" : "Stock to create",
+          "required" : true
+        } ]
+      }
+    }
+  },
+  "basePath" : "/resttostockapp/v1",
+  "definitions" : {
+    "Stock" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "size" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "color" : {
+          "type" : "string"
+        },
+        "number" : {
+          "type" : "integer"
+        }
+      }
+    }
+  }
+}
